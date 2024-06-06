@@ -12,4 +12,4 @@ RUN yarn
 
 COPY . .
 
-ENTRYPOINT [ "yarn", "start" ]
+CMD yarn start
