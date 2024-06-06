@@ -1,0 +1,18 @@
+services:
+  app:
+    image: app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: yarn start:dev
+    volumes:
+      - ./:/app:z
+    env_file:
+      - .env
+    environment:
+       NODE_ENV: development
+       DEBUG_PORT: 9801
+    ports:
+      - "3000:80"
+      - "9801:9801"
+
