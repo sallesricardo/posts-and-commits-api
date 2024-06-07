@@ -1,6 +1,8 @@
 FROM node:20.14-alpine
 
-RUN apk add --no-cache make gcc g++ python3 tzdata yarn
+RUN apk add --update --no-cache --virtual \
+    builds-deps build-base \
+    make gcc g++ python3 tzdata yarn
 
 RUN mkdir /app
 
