@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 dotenv.config();
 
 module.exports = {
+    PORT: Number(process.env.PORT) || 3000,
     JWT_SECRET: process.env.JWT_SECRET || "UNSET JWT SECRET",
     DB: {
         host: process.env.DB_HOST || "localhost",
