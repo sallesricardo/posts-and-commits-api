@@ -1,7 +1,7 @@
 const db = require('../../db');
 
 async function getPostsDB({ userId, page, limit }) {
-    const offset = page * limit;
+    const offset = (page - 1) * limit;
     const query = db('posts')
         .select(['id', 'user_id', 'title', 'description'])
         .where(function() {
@@ -51,10 +51,10 @@ async function deletePostDB({ postId, userId }) {
     if (userId !== post['user_id']) {
         throw Error('User cannot own this post');
     }
-    const result = await db('posts')
+    await db('posts')
         .delete()
         .where('id', postId);
-    return result;
+    return;
 }
 
 module.exports = {
