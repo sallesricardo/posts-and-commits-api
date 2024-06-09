@@ -2,17 +2,17 @@ const db = require('../../db');
 
 async function getPostsDB({ userId, page, limit }) {
     const offset = (page - 1) * limit;
-    const query = db('posts')
-        .select(['id', 'user_id', 'title', 'description'])
+    const query = db('posts as p')
+        .select(['p.id', 'p.user_id', 'u.name', 'p.title', 'p.description'])
+        .join('users as u', 'u.id', 'p.user_id')
         .where(function() {
             if (userId) {
                 this.where('user_id', userId);
             }
         })
-        .orderBy('created_at', 'desc')
+        .orderBy('p.created_at', 'desc')
         .offset(offset)
         .limit(limit);
-    console.log(query.toString());
     return await query;
 }
 
